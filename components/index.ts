@@ -1,2 +1,2 @@
 // Put your components here
-export default "dummy";
+export * from "./Header";
