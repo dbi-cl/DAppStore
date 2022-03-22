@@ -1,10 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { DApp } from '../../model/DApp'
+import type { NextApiRequest, NextApiResponse } from "next";
+import type { DAppList } from "../../model/DApp";
+import type { Result } from "../../model/Result";
 
+import { getDAppList } from "../../model/DAppStore";
+import { ok, err } from "../../model/Result";
+
+export type DAppListResult = DAppList;
+export type DAppListError = "UnsupportedMethod";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<DApp[]>
+  res: NextApiResponse<Result<DAppListResult, DAppListError>>
 ) {
-  res.status(200).json([])
+  if (req.method !== "GET") {
+    return res.status(400).json(err<DAppListError>("UnsupportedMethod"));
+  }
+  return res.status(200).json(ok<DAppListResult>(getDAppList()));
 }
