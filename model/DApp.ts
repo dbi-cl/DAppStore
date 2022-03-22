@@ -1,4 +1,5 @@
-export type DApp = {
+export type DAppId = string;
+export type DAppBrief = {
   // Name of the DApp
   name: string;
 
@@ -8,20 +9,24 @@ export type DApp = {
   // URL of the icon of the DApp
   iconURL: string;
 
-  // List of URLs of the snapshorts
-  snapshortURLs: string[];
-
   // Brief introduction of the DApp (<= 256 charactors)
   briefing: string;
+};
+
+export type DAppList = (DAppBrief & { id: DAppId })[];
+
+export type DApp = DAppBrief & {
+  // List of URLs of the snapshorts
+  snapshortURLs: string[];
 
   // Detailed introduction of the DApp
   description: string;
 
   // Name of the author
-  autherName: string;
+  authorName: string;
 
   // Email of the author
-  autherEmail: string;
+  authorEmail: string;
 
   // Timestamp of last modification (epoch time)
   modifiedBy: number;

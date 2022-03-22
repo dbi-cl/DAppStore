@@ -1,10 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { DApp } from "../../../model/DApp";
-import { Maybe, nothing } from "../../../model/Maybe";
+import type { DApp } from "../../../model/DApp";
+import type { Result } from "../../../model/Result";
+
+import { getDApp } from "../../../model/DAppStore";
+import { isNothing } from "../../../model/Maybe";
+import { ok, err } from "../../../model/Result";
+
+export type DAppDetailResult = DApp;
+export type DAppDetailError = "UnsupportedMethod" | "DAppNotFound";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Maybe<DApp>>
+  res: NextApiResponse<Result<DAppDetailResult, DAppDetailError>>
 ) {
-  res.status(200).json(nothing);
+  if (req.method !== "GET") {
+    return res.status(400).json(err<DAppDetailError>("UnsupportedMethod"));
+  }
+  const mDApp = getDApp(req.query.dappId as string);
+  if (isNothing(mDApp)) {
+    return res.status(404).json(err<DAppDetailError>("DAppNotFound"));
+  }
+  return res.status(200).json(ok<DAppDetailResult>(mDApp.value));
 }
