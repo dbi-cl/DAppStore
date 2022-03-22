@@ -1,6 +1,6 @@
 import { Categories, List } from "@/components";
 import { DApp } from "@/model/DApp";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import type { NextPage } from "next";
 import styles from "./list.module.scss";
@@ -18,14 +18,12 @@ const ListPage: NextPage<IListPageProps> = ({ list }) => {
           <span>Category</span>
         </div>
         <div className={styles.self}>
-          <Button
-            size="small"
-            variant="contained"
-            onClick={() => history.pushState("", "", "/submit")}
-          >
+          <Button size="small" variant="contained" href="/submit">
             Submit Dapp
           </Button>
-          <AccountCircleIcon sx={{ ml: 8, width: 70, height: 30 }} />
+          <IconButton sx={{ ml: 8, width: 30, height: 30, p: 0 }}>
+            <AccountCircleIcon sx={{ width: "100%", height: "100%" }} />
+          </IconButton>
         </div>
       </header>
       <Categories />
@@ -37,12 +35,18 @@ const ListPage: NextPage<IListPageProps> = ({ list }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:4000/list");
-  const list = await res.json();
+  const res = await fetch("https://dapp-store-deploy.vercel.app/api/dapps");
+  const data = await res.json();
+  const list = data && data.value;
+
+  if (!list)
+    return {
+      notFound: true,
+    };
 
   return {
     props: {
-      list: new Array(4).fill([...list]).flat(),
+      list: new Array(8).fill([...list]).flat(),
     },
   };
 };
