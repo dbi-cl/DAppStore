@@ -8,12 +8,13 @@ import { ok, err } from "../../model/Result";
 export type DAppListResult = DAppList;
 export type DAppListError = "UnsupportedMethod";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result<DAppListResult, DAppListError>>
 ) {
   if (req.method !== "GET") {
     return res.status(400).json(err<DAppListError>("UnsupportedMethod"));
   }
-  return res.status(200).json(ok<DAppListResult>(getDAppList()));
+  const dapps = await getDAppList();
+  return res.status(200).json(ok<DAppListResult>(dapps));
 }

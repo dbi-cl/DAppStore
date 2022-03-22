@@ -1,9 +1,17 @@
-import type { DApp, DAppBrief, DAppId, DAppList, DAppMeta } from "./DApp";
+import type { DApp, DAppList, DAppMeta } from "./DApp";
 import type { Maybe } from "./Maybe";
 
-import { v4 } from "uuid";
+import { MongoClient, ObjectId } from "mongodb";
 import { just, nothing, zip } from "./Maybe";
-import { stubDApps } from "./DAppStub";
+
+const DB_USR = process.env.MONGODB_USR as string;
+const DB_PWD = process.env.MONGODB_PWD as string;
+const DB_URI = process.env.MONGODB_URI as string;
+const uri = `mongodb+srv://${DB_USR}:${DB_PWD}@${DB_URI}`;
+const p$colDApps = new MongoClient(uri, {})
+  .connect()
+  .then((cl) => cl.db())
+  .then((db) => db.collection<DApp>("DApps"));
 
 const validate =
   <T>(validator: (value: any) => value is T) =>
@@ -34,34 +42,39 @@ export const validateDAppMeta = (obj: any): Maybe<DAppMeta> =>
     authorEmail: validateNonEmptyString(obj.authorEmail),
   });
 
-const dapps: Record<string, DApp> = {};
-
-export const addDApp = (dapp: DAppMeta): string => {
-  const id = v4();
+export const addDApp = async (dapp: DAppMeta): Promise<string> => {
+  const colDapps = await p$colDApps;
   const now = Date.now();
-  dapps[id] = {
+  const result = await colDapps.insertOne({
     ...dapp,
     createdBy: now,
     modifiedBy: now,
-  };
-  return id;
+  });
+  return result.insertedId.toString();
 };
 
-export const getDApp = (id: string): Maybe<DApp> => {
-  return dapps[id] ? just(dapps[id]) : nothing;
+export const getDApp = async (id: string): Promise<Maybe<DApp>> => {
+  const colDapps = await p$colDApps;
+  const dapp = await colDapps.findOne(
+    { _id: new ObjectId(id) },
+    { projection: { _id: 0 } }
+  );
+  return dapp ? just(dapp) : nothing;
 };
 
-export const getDAppList = (): DAppList => {
-  return Object.entries(dapps)
-    .sort(([_A, dappA], [_B, dappB]) => dappB.modifiedBy - dappA.modifiedBy)
-    .map(([id, { name, landingURL, iconURL, briefing }]) => ({
-      id,
-      name,
-      landingURL,
-      iconURL,
-      briefing,
-    }));
+export const getDAppList = async (): Promise<DAppList> => {
+  const colDapps = await p$colDApps;
+  const dapps = await colDapps
+    .find(
+      {},
+      { projection: { name: 1, landingURL: 1, iconURL: 1, briefing: 1 } }
+    )
+    .toArray();
+  return dapps.map(({ name, landingURL, iconURL, briefing, _id }) => ({
+    id: _id.toString(),
+    name,
+    landingURL,
+    iconURL,
+    briefing,
+  }));
 };
-
-// Load the stub
-stubDApps.forEach(addDApp);

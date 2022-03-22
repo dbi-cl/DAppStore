@@ -9,7 +9,7 @@ import { err, ok } from "../../../model/Result";
 export type NewDAppResult = { id: DAppId };
 export type NewDAppError = "UnsupportedMethod" | "InvalidMetaData";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result<NewDAppResult, NewDAppError>>
 ) {
@@ -21,10 +21,12 @@ export default function handler(
     if (isNothing(mDApp)) {
       return res.status(400).json(err<NewDAppError>("InvalidMetaData"));
     }
+    console.log("get here");
     return res
       .status(200)
-      .json(ok<NewDAppResult>({ id: addDApp(mDApp.value) }));
+      .json(ok<NewDAppResult>({ id: await addDApp(mDApp.value) }));
   } catch (e) {
+    console.log(e);
     return res.status(400).json(err<NewDAppError>("InvalidMetaData"));
   }
 }
