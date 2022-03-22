@@ -9,14 +9,14 @@ import { ok, err } from "../../../model/Result";
 export type DAppDetailResult = DApp;
 export type DAppDetailError = "UnsupportedMethod" | "DAppNotFound";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result<DAppDetailResult, DAppDetailError>>
 ) {
   if (req.method !== "GET") {
     return res.status(400).json(err<DAppDetailError>("UnsupportedMethod"));
   }
-  const mDApp = getDApp(req.query.dappId as string);
+  const mDApp = await getDApp(req.query.dappId as string);
   if (isNothing(mDApp)) {
     return res.status(404).json(err<DAppDetailError>("DAppNotFound"));
   }
