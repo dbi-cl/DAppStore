@@ -27,7 +27,7 @@ export const validateDAppMeta = (obj: any): Maybe<DAppMeta> =>
     name: validateNonEmptyString(obj.name),
     landingURL: validateNonEmptyString(obj.landingURL),
     iconURL: validateNonEmptyString(obj.iconURL),
-    snapshortURLs: validateStringArray(obj.snapshortURLs),
+    snapshotURLs: validateStringArray(obj.snapshotURLs),
     briefing: validateNonEmptyString(obj.briefing),
     description: validateString(obj.description),
     authorName: validateNonEmptyString(obj.authorName),

@@ -17,7 +17,7 @@ export default function handler(
     return res.status(400).json(err<NewDAppError>("UnsupportedMethod"));
   }
   try {
-    const mDApp = validateDAppMeta(JSON.parse(req.body));
+    const mDApp = validateDAppMeta(req.body);
     if (isNothing(mDApp)) {
       return res.status(400).json(err<NewDAppError>("InvalidMetaData"));
     }

@@ -17,7 +17,7 @@ export type DAppList = (DAppBrief & { id: DAppId })[];
 
 export type DAppMeta = DAppBrief & {
   // List of URLs of the snapshorts
-  snapshortURLs: string[];
+  snapshotURLs: string[];
 
   // Detailed introduction of the DApp
   description: string;
