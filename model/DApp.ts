@@ -28,4 +28,4 @@ export type DApp = {
 
   // Timestamp of creation (epoch time)
   createdBy: number;
-}
+};

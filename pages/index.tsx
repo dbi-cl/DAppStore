@@ -1,9 +1,15 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+import useSWR from "swr";
+import { fromJSON } from '../model/Maybe';
+
+const fetcher = (input: RequestInfo, init?: RequestInit) => fetch(input, init).then(res => res.json());
 
 const Home: NextPage = () => {
+  const { data, error } = useSWR('/api/dapps/123', fetcher);
+  console.log(fromJSON(data));
   return (
     <div className={styles.container}>
       <Head>
