@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import useSWR from "swr";
 
 const fetcher = (input: RequestInfo, init?: RequestInit) => fetch(input, init).then(res => res.json());
 

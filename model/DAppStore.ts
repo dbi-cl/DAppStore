@@ -1,4 +1,4 @@
-import type { DApp, DAppBrief, DAppId, DAppList } from "./DApp";
+import type { DApp, DAppBrief, DAppId, DAppList, DAppMeta } from "./DApp";
 import type { Maybe } from "./Maybe";
 
 import { v4 } from "uuid";
@@ -19,10 +19,10 @@ const isArrayOf =
   (s: any): s is T[] =>
     Array.isArray(s) && s.every(v);
 const validateStringArray = validate(isArrayOf(isNonEmptyString));
-const isNumber = (n: any): n is number => typeof n === "number";
-const validateNumber = validate(isNumber);
+// const isNumber = (n: any): n is number => typeof n === "number";
+// const validateNumber = validate(isNumber);
 
-export const validateDApp = (obj: any): Maybe<DApp> =>
+export const validateDAppMeta = (obj: any): Maybe<DAppMeta> =>
   zip({
     name: validateNonEmptyString(obj.name),
     landingURL: validateNonEmptyString(obj.landingURL),
@@ -32,15 +32,18 @@ export const validateDApp = (obj: any): Maybe<DApp> =>
     description: validateString(obj.description),
     authorName: validateNonEmptyString(obj.authorName),
     authorEmail: validateNonEmptyString(obj.authorEmail),
-    modifiedBy: validateNumber(obj.modifiedBy),
-    createdBy: validateNumber(obj.createdBy),
   });
 
 const dapps: Record<string, DApp> = {};
 
-export const addDApp = (dapp: DApp): string => {
+export const addDApp = (dapp: DAppMeta): string => {
   const id = v4();
-  dapps[id] = dapp;
+  const now = Date.now();
+  dapps[id] = {
+    ...dapp,
+    createdBy: now,
+    modifiedBy: now,
+  };
   return id;
 };
 

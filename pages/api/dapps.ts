@@ -12,7 +12,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Result<DAppListResult, DAppListError>>
 ) {
-  console.log("get here", getDAppList());
   if (req.method !== "GET") {
     return res.status(400).json(err<DAppListError>("UnsupportedMethod"));
   }

@@ -15,7 +15,7 @@ export type DAppBrief = {
 
 export type DAppList = (DAppBrief & { id: DAppId })[];
 
-export type DApp = DAppBrief & {
+export type DAppMeta = DAppBrief & {
   // List of URLs of the snapshorts
   snapshortURLs: string[];
 
@@ -27,7 +27,9 @@ export type DApp = DAppBrief & {
 
   // Email of the author
   authorEmail: string;
+};
 
+export type DApp = DAppMeta & {
   // Timestamp of last modification (epoch time)
   modifiedBy: number;
 

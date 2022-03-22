@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import type { DAppId } from "../../../model/DApp";
 import type { Result } from "../../../model/Result";
 
-import { addDApp, validateDApp } from "../../../model/DAppStore";
+import { addDApp, validateDAppMeta } from "../../../model/DAppStore";
 import { isNothing } from "../../../model/Maybe";
 import { err, ok } from "../../../model/Result";
 
@@ -17,7 +17,7 @@ export default function handler(
     return res.status(400).json(err<NewDAppError>("UnsupportedMethod"));
   }
   try {
-    const mDApp = validateDApp(JSON.parse(req.body));
+    const mDApp = validateDAppMeta(JSON.parse(req.body));
     if (isNothing(mDApp)) {
       return res.status(400).json(err<NewDAppError>("InvalidMetaData"));
     }
