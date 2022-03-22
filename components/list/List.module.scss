@@ -1,0 +1,10 @@
+.listContainer {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 250px);
+    place-items: center;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+
+    color: #212121;
+}
