@@ -67,7 +67,10 @@ export const getDAppList = async (): Promise<DAppList> => {
   const dapps = await colDapps
     .find(
       {},
-      { projection: { name: 1, landingURL: 1, iconURL: 1, briefing: 1 } }
+      {
+        projection: { name: 1, landingURL: 1, iconURL: 1, briefing: 1 },
+        sort: [["modifiedBy", -1]],
+      }
     )
     .toArray();
   return dapps.map(({ name, landingURL, iconURL, briefing, _id }) => ({
