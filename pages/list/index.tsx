@@ -4,6 +4,7 @@ import { Button, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import type { NextPage } from "next";
 import styles from "./list.module.scss";
+import { getDAppList } from "@/model/DAppStore";
 
 interface IListPageProps {
   list: DApp[];
@@ -35,18 +36,11 @@ const ListPage: NextPage<IListPageProps> = ({ list }) => {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://dapp-store-deploy.vercel.app/api/dapps");
-  const data = await res.json();
-  const list = data && data.value;
-
-  if (!list)
-    return {
-      notFound: true,
-    };
+  const dapps = await getDAppList();
 
   return {
     props: {
-      list: new Array(8).fill([...list]).flat(),
+      list: dapps
     },
   };
 };
