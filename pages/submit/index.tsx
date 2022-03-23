@@ -20,7 +20,7 @@ function CreateForm() {
   const [avatarSrc, setAvatar] = useState(
     "https://dappimg.com/media/image/dapp/e8fd3f39df0c49d68001c68d958e9f7d.blob"
   );
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (data: formType) => {
     axios
