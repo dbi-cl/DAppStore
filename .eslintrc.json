@@ -1,12 +1,9 @@
 {
-    "extends": [
-        "next/core-web-vitals",
-        "plugin:import/typescript"
-    ],
-    "plugins": ["import"],
-    "settings": {
-        "import/resolver": {
-            "typescript": {}
-        }
+  "extends": ["next/core-web-vitals", "plugin:import/typescript"],
+  "plugins": ["import"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
     }
+  }
 }

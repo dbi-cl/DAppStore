@@ -1,0 +1,38 @@
+.submitContainer {
+  background: #eee;
+  max-width: unset !important;
+  padding-top: 20px;
+  height: 100vh;
+  h2 {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  .textArea {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+  .addBtn {
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    border: 1px solid gray;
+    letter-spacing: 3px;
+    color: #797c7d;
+    box-shadow: #616161 0px 0px 3px;
+  }
+  .submitBtn {
+    background-color: #616161;
+    color: #fff;
+    height: 50px;
+    width: 300px;
+    font-size: 16px;
+    letter-spacing: 3px;
+    width: 400px;
+    margin-bottom: 300px;
+  }
+}
