@@ -74,8 +74,11 @@ export function FileUploader({ label, name, control }: FileInputProps) {
                   key={index}
                   style={{
                     backgroundImage: `url(${src})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
                     height: 200,
                     width: 200,
+                    margin: 30,
                   }}
                 ></div>
               ))}

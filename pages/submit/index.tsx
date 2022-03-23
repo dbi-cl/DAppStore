@@ -2,7 +2,14 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Box, Container, FormControl, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  FormControl,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 
 import { FileUploader, FormTextInput } from "@/components";
 import { toBase64 } from "@/utils";
@@ -10,6 +17,13 @@ import { formType } from "../../types";
 
 import styles from "./submit.module.scss";
 import utils from "../../styles/utils.module.scss";
+
+enum ReqStatus {
+  INIT,
+  PENDING,
+  SUCCESS,
+  FAILED,
+}
 
 function Submit() {
   return createContainer();
@@ -20,12 +34,18 @@ function CreateForm() {
   const [avatarSrc, setAvatar] = useState(
     "https://dappimg.com/media/image/dapp/e8fd3f39df0c49d68001c68d958e9f7d.blob"
   );
+  const [reqStatus, setReqStatus] = useState<ReqStatus>(ReqStatus.INIT);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit = (data: formType) => {
+    setReqStatus(ReqStatus.PENDING);
     axios
       .post("/api/dapps/new", { ...data, iconURL: avatarSrc })
-      .then((json) => console.log(json));
+      .then((json) => {
+        console.log(json);
+        setReqStatus(ReqStatus.SUCCESS);
+      })
+      .catch((err) => setReqStatus(ReqStatus.FAILED));
   };
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,14 +123,26 @@ function CreateForm() {
         />
 
         <Button
+          disabled={reqStatus === ReqStatus.PENDING}
           type="submit"
           className={`${utils.centerAlign} ${styles.submitBtn}`}
           variant="contained"
           onClick={handleSubmit(onSubmit)}
         >
-          SUBMIT
+          {reqStatus === ReqStatus.PENDING ? "loading..." : "SUBMIT"}
         </Button>
       </FormControl>
+
+      <Snackbar
+        open={reqStatus === ReqStatus.SUCCESS || reqStatus === ReqStatus.FAILED}
+        autoHideDuration={6000}
+      >
+        <Alert severity={reqStatus === ReqStatus.SUCCESS ? "success" : "error"}>
+          {reqStatus === ReqStatus.SUCCESS
+            ? "submit success"
+            : "submit failed!"}
+        </Alert>
+      </Snackbar>
 
       {/* <FormControl>
                 <TextField className={styles.textArea} variant="standard" label="Title*" name='title' />
