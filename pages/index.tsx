@@ -35,7 +35,7 @@ const ListPage: NextPage<IListPageProps> = ({ list }) => {
   );
 };
 
-export const getStaticProps = async () => ({
+export const getServerSideProps = async () => ({
   props: {
     list: await getDAppList(),
   },
