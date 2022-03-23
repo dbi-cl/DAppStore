@@ -1,4 +1,4 @@
 export interface ICategoriesCardProps {
-    text: string;
-    onClick?: () => void;
+  text: string;
+  onClick?: () => void;
 }

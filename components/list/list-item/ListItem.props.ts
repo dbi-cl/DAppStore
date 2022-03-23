@@ -1,5 +1,5 @@
-import { DApp } from "@/model/DApp"
+import { DApp } from "@/model/DApp";
 
 export interface IListItemProps {
-    item: DApp;
+  item: DApp;
 }

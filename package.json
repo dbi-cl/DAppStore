@@ -6,19 +6,22 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier -w ."
   },
   "dependencies": {
-    "@types/mongodb": "^4.0.7",
-    "mongodb": "^4.4.1",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.1",
+    "@types/mongodb": "^4.0.7",
+    "axios": "^0.26.1",
+    "mongodb": "^4.4.1",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swr": "^1.2.2",
-    "sass": "^1.49.9"
+    "react-hook-form": "^7.28.1",
+    "sass": "^1.49.9",
+    "swr": "^1.2.2"
   },
   "devDependencies": {
     "@emotion/react": "^11.8.2",
