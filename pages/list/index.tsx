@@ -35,14 +35,10 @@ const ListPage: NextPage<IListPageProps> = ({ list }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const dapps = await getDAppList();
-
-  return {
-    props: {
-      list: dapps
-    },
-  };
-};
+export const getStaticProps = async () => ({
+  props: {
+    list: await getDAppList(),
+  },
+});
 
 export default ListPage;
