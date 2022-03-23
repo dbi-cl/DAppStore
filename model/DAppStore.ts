@@ -3,6 +3,7 @@ import type { Maybe } from "./Maybe";
 
 import { MongoClient, ObjectId } from "mongodb";
 import { just, nothing, zip } from "./Maybe";
+import { stubDApps } from "./DAppStub";
 
 const DB_USR = process.env.MONGODB_USR as string;
 const DB_PWD = process.env.MONGODB_PWD as string;
@@ -11,7 +12,22 @@ const uri = `mongodb+srv://${DB_USR}:${DB_PWD}@${DB_URI}`;
 const p$colDApps = new MongoClient(uri, {})
   .connect()
   .then((cl) => cl.db())
-  .then((db) => db.collection<DApp>("DApps"));
+  .then((db) => db.collection<DApp>("DApps"))
+
+  // Fill the stubs
+  .then(async (colDApps) => {
+    if ((await colDApps.countDocuments()) === 0) {
+      const now = Date.now();
+      await colDApps.insertMany(
+        stubDApps.map((dapp) => ({
+          ...dapp,
+          modifiedBy: now,
+          createdBy: now,
+        }))
+      );
+    }
+    return colDApps;
+  });
 
 const validate =
   <T>(validator: (value: any) => value is T) =>
