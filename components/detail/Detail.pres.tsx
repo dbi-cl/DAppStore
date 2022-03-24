@@ -16,7 +16,7 @@ export const Detail: FunctionComponent<IDetailProps> = ({ detail }) => {
         <Box
           sx={{
             display: "flex",
-            "& > *:first-child": {
+            "& > *:first-of-type": {
               flex: "none",
             },
           }}
