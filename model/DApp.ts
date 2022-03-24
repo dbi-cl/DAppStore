@@ -13,7 +13,9 @@ export type DAppBrief = {
   briefing: string;
 };
 
-export type DAppList = (DAppBrief & { id: DAppId })[];
+export type DAppItem = DAppBrief & { id: DAppId };
+
+export type DAppList = DAppItem[];
 
 export type DAppMeta = DAppBrief & {
   // List of URLs of the snapshorts

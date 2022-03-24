@@ -12,7 +12,6 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.5.1",
     "@types/mongodb": "^4.0.7",
     "axios": "^0.26.1",
     "mongodb": "^4.4.1",

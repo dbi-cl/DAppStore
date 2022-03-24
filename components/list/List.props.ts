@@ -1,5 +1,5 @@
-import { DApp } from "@/model/DApp";
+import { DAppList } from "@/model/DApp";
 
 export interface IListProps {
-  list: DApp[];
+  list: DAppList;
 }

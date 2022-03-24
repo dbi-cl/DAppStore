@@ -1,0 +1,30 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  margin-top: 5px;
+}
+
+.routerTitle {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  & > span:first-child {
+    margin-right: 10px;
+  }
+
+  & > span:last-child {
+    text-decoration: underline;
+  }
+}
+
+.self {
+  display: flex;
+  align-items: center;
+}
