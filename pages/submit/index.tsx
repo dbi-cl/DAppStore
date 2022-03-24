@@ -144,6 +144,7 @@ function CreateForm() {
       <Snackbar
         open={reqStatus === ReqStatus.SUCCESS || reqStatus === ReqStatus.FAILED}
         autoHideDuration={6000}
+        onClose={() => setReqStatus(ReqStatus.INIT)}
       >
         <Alert severity={reqStatus === ReqStatus.SUCCESS ? "success" : "error"}>
           {reqStatus === ReqStatus.SUCCESS
