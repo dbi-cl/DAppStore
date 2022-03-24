@@ -17,23 +17,13 @@ const DetailPage: NextPage<IDetailPageProps> = ({ detail }) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const list = await getDAppList();
-
-  const paths = list.map((item) => ({
-    params: { id: item.id },
-  }));
-
-  return { paths, fallback: false };
-};
-
 type Path = {
   params: {
     id: string;
   };
 };
 
-export const getStaticProps = async ({ params }: Path) => {
+export const getServerSideProps = async ({ params }: Path) => {
   const data = await getDApp(params.id);
   const detail = !isNothing(data) && data.value;
 
