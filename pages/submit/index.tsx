@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import Image from "next/image";
+import Router from "next/router";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {
@@ -44,6 +45,9 @@ function CreateForm() {
       .then((json) => {
         console.log(json);
         setReqStatus(ReqStatus.SUCCESS);
+      })
+      .then(() => {
+        Router.push("/");
       })
       .catch((err) => setReqStatus(ReqStatus.FAILED));
   };
