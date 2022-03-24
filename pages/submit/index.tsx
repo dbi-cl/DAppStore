@@ -40,7 +40,11 @@ function CreateForm() {
   const onSubmit = (data: formType) => {
     setReqStatus(ReqStatus.PENDING);
     axios
-      .post("/api/dapps/new", { ...data, iconURL: avatarSrc })
+      .post("/api/dapps/new", {
+        ...data,
+        snapshotURLs: data.snapshotURLs ?? [],
+        iconURL: avatarSrc,
+      })
       .then((json) => {
         console.log(json);
         setReqStatus(ReqStatus.SUCCESS);
