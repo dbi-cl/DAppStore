@@ -32,8 +32,9 @@ export const Detail: FunctionComponent<IDetailProps> = ({ detail }) => {
                 borderRadius: 1,
                 backgroundColor: "#274fb5",
               }}
+              href={landingURL}
             >
-              Get
+              Launch
             </Button>
           </Box>
           <Box className={styles.content}>
