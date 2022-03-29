@@ -1,21 +1,25 @@
-import { Categories, List, Header } from "@/components";
+import { Header, HomePicture } from "@/components";
+import { HomeList } from "@/components";
 import { DAppList } from "@/model/DApp";
-import type { NextPage } from "next";
-import styles from "./index.module.scss";
 import { getDAppList } from "@/model/DAppStore";
+import type { NextPage } from "next";
 
-interface IListPageProps {
+interface IHomePageProps {
   list: DAppList;
 }
 
-const ListPage: NextPage<IListPageProps> = ({ list }) => {
+const HomePage: NextPage<IHomePageProps> = ({ list }) => {
+  const currentTab = "Home";
+  const titles = ["Trending", "Games", "DeFi"];
+
   return (
     <>
-      <Header />
-      <Categories />
-      <div className={styles.list}>
-        <List list={list}></List>
-      </div>
+      <Header currentTab={currentTab} />
+      <HomePicture list={list} />
+      {list.length > 0 &&
+        titles.map((title, index) => (
+          <HomeList key={index} title={title} list={list} />
+        ))}
     </>
   );
 };
@@ -26,4 +30,4 @@ export const getServerSideProps = async () => ({
   },
 });
 
-export default ListPage;
+export default HomePage;

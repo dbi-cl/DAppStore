@@ -11,7 +11,7 @@ export interface IDetailPageProps {
 const DetailPage: NextPage<IDetailPageProps> = ({ detail }) => {
   return (
     <>
-      <Header />
+      <Header currentTab="Category" />
       <Detail detail={detail} />
     </>
   );
