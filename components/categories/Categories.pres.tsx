@@ -16,7 +16,7 @@ export const Categories: FunctionComponent = () => {
   ];
 
   return (
-    <Carousel sx={{ m: "10px" }}>
+    <Carousel sx={{ justifyContent: "center" }}>
       {categories.map((item) => (
         <CategoriesCard key={item} text={item} />
       ))}

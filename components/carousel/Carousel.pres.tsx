@@ -15,20 +15,15 @@ export const Carousel: FunctionComponent<ICarouselProps> = ({
       onClick={onClick}
       sx={{
         display: "flex",
-        justifyContent: "center",
-        overflowX: "scroll",
+        overflowX: "auto",
         width: "100%",
         pt: verticalPadding,
         pb: verticalPadding,
 
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-
         /** The leading body in the selector is so that this rule is more specific than the root rules for
          * some of the MUI components which would set the margin of the element to 0. */
         "body & > *": {
-          flex: "0 0 auto",
+          flex: "none",
           marginRight: gap ?? 2, // The spacing value is 8px so * 2 is 16px
 
           "&:first-of-type": {
