@@ -19,6 +19,8 @@ import { formType } from "../../types";
 import styles from "./submit.module.scss";
 import utils from "../../styles/utils.module.scss";
 
+import edgeIcon from "@/assets/images/edge.svg";
+
 enum ReqStatus {
   INIT,
   PENDING,
@@ -32,9 +34,7 @@ function Submit() {
 
 function CreateForm() {
   const { control, handleSubmit } = useForm<formType>();
-  const [avatarSrc, setAvatar] = useState(
-    "https://dappimg.com/media/image/dapp/e8fd3f39df0c49d68001c68d958e9f7d.blob"
-  );
+  const [avatarSrc, setAvatar] = useState(edgeIcon.src);
   const [reqStatus, setReqStatus] = useState<ReqStatus>(ReqStatus.INIT);
   const inputRef = useRef<HTMLInputElement>(null);
 
