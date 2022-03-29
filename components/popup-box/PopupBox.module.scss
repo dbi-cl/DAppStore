@@ -1,0 +1,76 @@
+.popup {
+  width: 400px;
+  height: 500px;
+
+  background-color: #ffffff;
+
+  font-family: "Roboto";
+  text-transform: none;
+  color: #000000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 6px 8px;
+  margin-bottom: 5px;
+
+  & > span {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 24px;
+  }
+}
+
+.closeBtn {
+  padding: 0;
+}
+
+.highlight {
+  color: #ee5d8f;
+}
+
+.snackbar {
+  width: 92%;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #edeef2;
+
+  margin: 0 auto 10px;
+  padding: 8px;
+
+  border-radius: 10px;
+  border: 1px solid #bdc3c770;
+}
+
+.topbar {
+  text-align: left;
+
+  .font {
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+.linkbar {
+  height: 60px;
+  align-items: center;
+  font-size: 15px;
+
+  .icon {
+    flex: none;
+    width: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > img {
+      width: 100%;
+    }
+  }
+}

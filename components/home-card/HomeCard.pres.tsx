@@ -28,18 +28,18 @@ export const HomeCard: FunctionComponent<IHomeCardProps> = ({ item }) => {
         <Typography className={styles.name}>{name}</Typography>
         <Box className={styles.stars}>
           <>
-            {[...Array(Math.floor(point / 2))].map((index) => (
+            {[...Array(Math.floor(point / 2))].map((_, index) => (
               <StarIcon key={index} />
             ))}
           </>
           <>
-            {[...Array(point % 2)].map((index) => (
+            {[...Array(point % 2)].map((_, index) => (
               <StarHalfIcon key={index} />
             ))}
           </>
           <>
             {point < 9 &&
-              [...Array(Math.floor((10 - point) / 2))].map((index) => (
+              [...Array(Math.floor((10 - point) / 2))].map((_, index) => (
                 <StarBorderIcon key={index} />
               ))}
           </>

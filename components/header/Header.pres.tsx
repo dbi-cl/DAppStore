@@ -1,11 +1,18 @@
-import { Button, Box, IconButton } from "@mui/material";
+import { Backdrop, Button, Box, IconButton } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Router from "next/router";
 import { IHeaderProps } from "./Header.props";
 import styles from "./Header.module.scss";
+import { PopupBox } from "../popup-box";
 
 export const Header: FunctionComponent<IHeaderProps> = ({ currentTab }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
   const titles = [
     {
       title: "Home",
@@ -33,6 +40,27 @@ export const Header: FunctionComponent<IHeaderProps> = ({ currentTab }) => {
         ))}
       </Box>
       <Box className={styles.self}>
+        <Button
+          onClick={handleToggle}
+          sx={{
+            backgroundColor: "#3BC683",
+            mr: 2,
+
+            "&:hover": {
+              backgroundColor: "#27ae60",
+            },
+          }}
+          size="small"
+          variant="contained"
+        >
+          Log In
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={open}
+          >
+            <PopupBox />
+          </Backdrop>
+        </Button>
         <Button size="small" variant="contained" href="/submit">
           Submit Dapp
         </Button>
