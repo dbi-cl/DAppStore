@@ -52,7 +52,7 @@ export const PopupBox: FunctionComponent = () => {
       </div>
       <div className={snackBarStyle(styles.topbar)}>
         <Typography className={styles.font}>
-          By connecting a wallet, you agree to Microsoft Edge's{" "}
+          By connecting a wallet, you agree to Microsoft Edge&apos;s{" "}
           <MuiLink
             sx={{ textDecoration: "underline" }}
             className={styles.highlight}

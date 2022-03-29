@@ -120,11 +120,6 @@
   }
 }
 
-.link {
-  color: #0c3e88;
-  font-size: 21px;
-}
-
 .snapShotContainer {
   display: flex;
   overflow-x: auto;
@@ -161,5 +156,14 @@
     width: 100%;
     height: 100%;
     border-radius: 8px;
+  }
+}
+
+.chartContainer {
+  width: 90%;
+  margin: 20px auto;
+
+  & > img {
+    width: 100%;
   }
 }
