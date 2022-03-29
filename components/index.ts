@@ -11,3 +11,4 @@ export * from "./home-list";
 export * from "./home-picture";
 export * from "./list";
 export * from "./popup-box";
+export * from "./score";
